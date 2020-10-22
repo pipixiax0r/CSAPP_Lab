@@ -203,11 +203,10 @@ int negate(int x) {
  *   Rating: 3
  */
 int isAsciiDigit(int x) {
-	int mask1 = 0x30;
-	int mask2 = 0xa;
-	int mask3 = 0xc;
-	x = !(x & mask1) ^ mask1;
-	x = (x )
+	int flag1 = !((x&0xf0)^0x30);
+	int flag2 = !((!((x&0xc)^0xc)) | (!((x&0xe)^0xa)));
+    int flag3 = !(x>>8);
+    return flag1&flag2&flag3;
 }
 /* 
  * conditional - same as x ? y : z 
@@ -217,7 +216,8 @@ int isAsciiDigit(int x) {
  *   Rating: 3
  */
 int conditional(int x, int y, int z) {
-  return 2;
+	int xeq0 = ~(!x) + 1;
+	return (xeq0&z)|((~xeq0)&y);	
 }
 /* 
  * isLessOrEqual - if x <= y  then return 1, else return 0 
@@ -227,7 +227,7 @@ int conditional(int x, int y, int z) {
  *   Rating: 3
  */
 int isLessOrEqual(int x, int y) {
-  return 2;
+		
 }
 //4
 /* 
@@ -239,7 +239,7 @@ int isLessOrEqual(int x, int y) {
  *   Rating: 4 
  */
 int logicalNeg(int x) {
-  return 2;
+	return 2;
 }
 /* howManyBits - return the minimum number of bits required to represent x in
  *             two's complement
